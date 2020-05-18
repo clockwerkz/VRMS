@@ -40,7 +40,8 @@ const routes = [
     { path: "/emailsent", name: "emailsent", Component: EmailSent },
     { path: "/events", name: "events", Component: Events },
     { path: "/projectleader", name: "pldashboard", Component: ProjectLeaderDashboard },
-    { path: '/add/:item', name: 'addnew', Component: AddNew}
+    { path: '/add/:item', name: 'addnew', Component: AddNew},
+    { path: "/project", name: "project", Component: Project } 
 ];
 
 const App = (props) => {
