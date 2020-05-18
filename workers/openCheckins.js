@@ -6,6 +6,7 @@ module.exports = (cron, fetch) => {
     async function fetchEvents() {    
         try {
             const res = await fetch("https://vrms.io/api/events");
+            // const res = await fetch("http://localhost:4000/api/events");
             const resJson = await res.json();
 
             return resJson;
@@ -29,15 +30,19 @@ module.exports = (cron, fetch) => {
     
     async function openCheckins(events) {
         if(events && events.length > 0) {
-            events.forEach(async event => {
+            events.forEach(event => {
                 // console.log('Opening event: ', event);
 
-                await fetch(`https://vrms.io/api/events/${event._id}`, {
+                fetch(`https://vrms.io/api/events/${event._id}`, {
+                // fetch(`http://localhost:4000/api/events/${event._id}`, {
                     method: "PATCH",
                     headers: {
                       "Content-Type": "application/json"
                     }
                 })
+                    .then(res => {
+                        const response = res;
+                    })
                     .catch(err => {
                         console.log(err);
                     });
@@ -46,7 +51,7 @@ module.exports = (cron, fetch) => {
     };
     
     async function runTask() {
-        console.log("I'm going to open check-ins");
+        console.log("Opening check-ins");
 
         // Get current time and set to date variable
         const currentTimeISO = new Date().toISOString();
@@ -58,7 +63,7 @@ module.exports = (cron, fetch) => {
         const eventsToOpen = await sortAndFilterEvents(currentTimeISO, thirtyMinutesISO);
         await openCheckins(eventsToOpen);
 
-        console.log("I finished opening check-ins");
+        console.log("Check-ins opened");
     };
 
     const scheduledTask = cron.schedule('*/10 7-21 * * *', () => {

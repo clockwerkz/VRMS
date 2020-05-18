@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
 
-const { Event } = require('../models/event.model');
+const { RecurringEvent } = require('../models/recurringEvent.model');
 
-// GET /api/events/
-router.get('/', (req, res) => {
-    const { query } = req;
+// GET /api/recurringevents/
+router.get('/', cors(), (req, res) => {
+    // const { query } = req;
         
-    Event
-        .find(query.checkInReady === 'true' ? query : undefined)
-        .then(events => {
-            res.json(events);
+    RecurringEvent
+        // .find(query.checkInReady === 'true' ? query : undefined)
+        .find()
+        .then(recurringEvents => {
+            res.json(recurringEvents);
         })
         .catch(err => {
             console.log(err);
@@ -21,9 +23,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Event
+    RecurringEvent
         .create(req.body)
-        .then(event => {
+        .then(recurrentEvent => {
             res.sendStatus(201);
         })
         .catch(err => {
@@ -35,10 +37,10 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Event
+    RecurringEvent
         .findById(req.params.id)
-        .then(event => {
-            res.json(event);
+        .then(recurringEvent => {
+            res.json(recurringEvent);
         })
         .catch(err => {
             console.log(err);
@@ -49,18 +51,18 @@ router.get('/:id', (req, res) => {
 });
 
 router.patch('/:id', (req, res) => {
-    Event
-        .findById(req.params.id, function(err, event) {
-            event.checkInReady = !event.checkInReady;
+    RecurringEvent
+        .findById(req.params.id, function(err, recurringEvent) {
+            // recurringEvent.checkInReady = !recurringEvent.checkInReady;
 
-            event.save(err => {
+            recurringEvent.save(err => {
                 if (err) {
                     console.log(err);
                 }
             })
         })
-        .then(checkIn => {
-            res.sendStatus(204);
+        .then(recurringEvent => {
+            res.sendStatus(204)
         })
         .catch(err => {
             console.log(err);
