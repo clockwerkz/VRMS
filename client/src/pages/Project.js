@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../sass/Project.scss';
 
 //Project ID, Name, Description, githubIdentifier, 
 //Project Stus, Location(s), Created Date, Completed Date, 
@@ -8,10 +9,18 @@ import React, { useState } from 'react';
 
 const Project = (props) => {
     const [ isEditing, setIsEditing ] = useState(false);
+
+    const handleEditButton = () => {
+        setIsEditing(!isEditing);
+    }
     if (isEditing) {
+
         return (
             <div>
-                <h1>Project Info Page</h1>
+                <div className="project-header">
+                    <h1>Project Info Page</h1>
+                    <p onClick={handleEditButton}>Save Changes</p>
+                </div>
                 <label htmlFor="projectName">Project Name:</label>
                 <input name="projectName" type="text" value="Name"></input>
             </div>
@@ -19,7 +28,10 @@ const Project = (props) => {
     } else {
         return (
             <div>
-                <h1>Project Info Page</h1>
+                <div className="project-header">
+                    <h1>Project Info Page</h1>
+                    <p onClick={handleEditButton}>Edit Project</p>
+                </div>
                 <p>Project Name:</p>
                 <p>Project Name</p>
             </div>
