@@ -18,6 +18,7 @@ import Success from "./pages/Success";
 import HandleAuth from "./pages/HandleAuth";
 import EmailSent from "./pages/EmailSent";
 import Events from "./pages/Events";
+import Project from './pages/Project';
 
 import "./App.scss";
 
@@ -33,7 +34,8 @@ const routes = [
   { path: "/success", name: "success", Component: Success },
   { path: "/handleauth", name: "handleauth", Component: HandleAuth },
   { path: "/emailsent", name: "emailsent", Component: EmailSent },
-  { path: "/events", name: "events", Component: Events }
+  { path: "/events", name: "events", Component: Events },
+  { path: "/project", name: "project", Component: Project}
 ];
 
 const App = props => {
