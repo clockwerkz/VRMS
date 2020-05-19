@@ -36,16 +36,23 @@ const Project = (props) => {
                     <p onClick={handleEditButton} className="btn btn--edit">Save Changes</p>
                 </div>
                 <div className="project-entry">
-                    <label htmlFor="projectName" className="project-entry__label">Project Name:</label>
-                    <input name="projectName" type="text" value={data.name ? data.name : ''} onChange={(e)=>handleInputChange("name", e.target.value)} className="project-name__data"></input>
+                    <label htmlFor="name" className="project-entry__label">Project Name:</label>
+                    <input name="name" type="text" className="project-name__data"
+                    value={data.name ? data.name : ''} 
+                    onChange={(e)=>handleInputChange("name", e.target.value)}></input>
                 </div>
                 <div className="project-entry">
-                    <p class="project-entry__label">Description:</p>
-                    <p class="project-entry__data">I'm baby vaporware hammock meh church-key kombucha typewriter. Asymmetrical gastropub gentrify pug vegan la croix man braid cray kinfolk hashtag hot chicken. </p>
+                    <label htmlFor="description" className="project-entry__label">Description:</label>
+                    <textarea name="description" type="text" className="project-name__data" rows="5" cols="40"
+                        onChange={(e)=>handleInputChange("description", e.target.value)}>
+                            {data.description ?  data.description : ''}
+                        </textarea>
                 </div> 
                 <div className="project-entry">
-                <label htmlFor="projectName" className="project-entry__label">Github Identifier:</label>
-                    <input name="projectName" type="text" value="githubidentifier" className="project-name__data"></input>
+                    <label htmlFor="githubIdentifier" className="project-entry__label">Github Identifier:</label>
+                    <input name="githubIdentifier" type="text" className="project-name__data"
+                        value={data.githubIdentifier ?  data.githubIdentifier : ''}
+                        onChange={(e)=>handleInputChange("githubIdentifier", e.target.value)}></input>
                 </div> 
                 <div className="project-entry">
                     <p class="project-entry__label">Status:</p>
