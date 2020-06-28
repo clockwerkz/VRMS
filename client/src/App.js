@@ -27,6 +27,8 @@ import ProjectLeaderDashboard from "./pages/ProjectLeaderDashboard";
 // Auth0 test components
 import AuthTest from './components/AuthTest';
 import ExternalApi from './components/ExternalApi';
+import config from './auth_config.json';
+import history from './utils/history';
 
 import "./App.scss";
 
@@ -53,13 +55,24 @@ const routes = [
     { path: "/add/:item", name: "addnew", Component: AddNew },
 ];
 
+const onRedirectCallback = appState => {
+    history.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : window.location.pathname
+    );
+  };
+  
+
 const App = () => {
     return (
         <AuthProvider>
             <Auth0Provider
-                domain="dev-64n7s4br.auth0.com"
-                clientId= "la5KRzcOm5aJp4d7M5xTty1H6724UyCp"
-                redirectUri={window.location.origin}
+                domain={config.domain}
+                client_id={config.clientId}
+                redirect_uri={window.location.origin}
+                audience={config.audience}
+                onRedirectCallback={onRedirectCallback}
             >
                 <div className="app">
                     <div className="app-container">
