@@ -1,6 +1,8 @@
 import React from "react";
 import { AuthProvider } from "./context/authContext";
+import { Auth0Provider } from '@auth0/auth0-react';
 import { Route } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
 
 import Firebase from "./firebase";
 
@@ -22,6 +24,10 @@ import Events from "./pages/Events";
 import AddNew from "./pages/AddNew";
 import ProjectLeaderDashboard from "./pages/ProjectLeaderDashboard";
 
+// Auth0 test components
+import AuthTest from './components/AuthTest';
+import ExternalApi from './components/ExternalApi';
+
 import "./App.scss";
 
 const routes = [
@@ -38,6 +44,7 @@ const routes = [
     { path: "/handleauth", name: "handleauth", Component: HandleAuth },
     { path: "/emailsent", name: "emailsent", Component: EmailSent },
     { path: "/events", name: "events", Component: Events },
+    { path: "/authtest", name: "authtest", Component: AuthTest },
     {
         path: "/projectleader",
         name: "pldashboard",
@@ -49,22 +56,29 @@ const routes = [
 const App = () => {
     return (
         <AuthProvider>
-            <div className="app">
-                <div className="app-container">
-                    <Navbar />
-                    <main role="main" className="main">
-                        {routes.map(({ path, Component }) => (
-                            <Route
-                                key={path}
-                                exact
-                                path={path}
-                                component={Component}
-                            />
-                        ))}
-                    </main>
-                    <Footer />
+            <Auth0Provider
+                domain="dev-64n7s4br.auth0.com"
+                clientId= "la5KRzcOm5aJp4d7M5xTty1H6724UyCp"
+                redirectUri={window.location.origin}
+            >
+                <div className="app">
+                    <div className="app-container">
+                        <Navbar />
+                        <main role="main" className="main">
+                            {routes.map(({ path, Component }) => (
+                                <Route
+                                    key={path}
+                                    exact
+                                    path={path}
+                                    component={Component}
+                                />
+                            ))}
+                        </main>
+                        <Footer />
+                    </div>
                 </div>
-            </div>
+                <Route path="/external-api" component={ExternalApi} />
+            </Auth0Provider>
         </AuthProvider>
     );
 };

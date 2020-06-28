@@ -1,0 +1,5 @@
+{
+    "domain": "dev-64n7s4br.auth0.com",
+    "clientId": "la5KRzcOm5aJp4d7M5xTty1H6724UyCp",
+    "audience":"http://localhost:5000/"
+  }

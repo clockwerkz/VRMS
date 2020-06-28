@@ -1,7 +1,16 @@
 const express = require('express');
 const router = express.Router();
-
+const checkJwt = require('../auth/checkJwt');
 const { User } = require('../models/user.model');
+
+// GET /api/users/authtest
+router.get("/authtest", checkJwt, (req, res) => {
+    const userID = req.user['http://localhost:5000/email']
+    console.log('route hit', userID);
+    res.send({
+      msg: "Your Access Token was successfully validated!"
+    });
+});
 
 // GET /api/users/
 router.get('/', (req, res) => {

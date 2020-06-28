@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-
+import LoginButton from "./LoginButton";
+import LogoutButton from './LogoutButton';
 import "../sass/Navbar.scss";
 
 const Navbar = (props) => {
@@ -11,6 +12,9 @@ const Navbar = (props) => {
                 role="navigation"
                 aria-label="main navigation"
             >
+                <LoginButton />
+                <LogoutButton />
+                <Link to="/authtest"><p className="home-link-text">Auth</p></Link>
                 <div className="navbar-buttons-container">
                     {props.location.pathname === "/" ? (
                         <Link to="/admin">
@@ -42,7 +46,7 @@ const Navbar = (props) => {
 
                 {props.location.pathname === "/" ||
                 props.location.pathname === "/success" ? (
-                    <div className="navbar-logo grow">
+                    <div className="navbar-logo">
                         <img src="/hflalogo.png" alt="Hack for LA Logo"></img>
                     </div>
                 ) : (
