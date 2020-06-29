@@ -7,23 +7,28 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 // Auth0 configuration / provider
-import { Auth0Provider } from './components/react-auth0-spa';
+import { Auth0Provider } from '@auth0/auth0-react';
 import config from "./auth_config.json";
-import history from "./utils/history";
+// import history from "./utils/history";
 
-const onRedirectCallback = appState => {
-    history.push(
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
-  };
+// const onRedirectCallback = appState => {
+//     history.push(
+//       appState && appState.targetUrl
+//         ? appState.targetUrl
+//         : window.location.pathname
+//     );
+//   };
 
 ReactDOM.render(
-    
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Auth0Provider
+    domain={config.domain}
+    client_id={config.clientId}
+    redirect_uri={window.location.origin}
+    >
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </Auth0Provider>
     , 
     document.getElementById('root')
 );

@@ -1,6 +1,5 @@
 import React from "react";
 import { AuthProvider } from "./context/authContext";
-import { Auth0Provider } from '@auth0/auth0-react';
 import { Route } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
 
@@ -26,9 +25,9 @@ import ProjectLeaderDashboard from "./pages/ProjectLeaderDashboard";
 
 // Auth0 test components
 import AuthTest from './components/AuthTest';
-import ExternalApi from './components/ExternalApi';
-import config from './auth_config.json';
-import history from './utils/history';
+// import ExternalApi from './components/ExternalApi';
+// import config from './auth_config.json';
+// import history from './utils/history';
 
 import "./App.scss";
 
@@ -55,43 +54,26 @@ const routes = [
     { path: "/add/:item", name: "addnew", Component: AddNew },
 ];
 
-const onRedirectCallback = appState => {
-    history.push(
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
-  };
-  
 
 const App = () => {
     return (
         <AuthProvider>
-            <Auth0Provider
-                domain={config.domain}
-                client_id={config.clientId}
-                redirect_uri={window.location.origin}
-                audience={config.audience}
-                onRedirectCallback={onRedirectCallback}
-            >
-                <div className="app">
-                    <div className="app-container">
-                        <Navbar />
-                        <main role="main" className="main">
-                            {routes.map(({ path, Component }) => (
-                                <Route
-                                    key={path}
-                                    exact
-                                    path={path}
-                                    component={Component}
-                                />
-                            ))}
-                        </main>
-                        <Footer />
-                    </div>
+            <div className="app">
+                <div className="app-container">
+                    <Navbar />
+                    <main role="main" className="main">
+                        {routes.map(({ path, Component }) => (
+                            <Route
+                                key={path}
+                                exact
+                                path={path}
+                                component={Component}
+                            />
+                        ))}
+                    </main>
+                    <Footer />
                 </div>
-                <Route path="/external-api" component={ExternalApi} />
-            </Auth0Provider>
+            </div>
         </AuthProvider>
     );
 };
