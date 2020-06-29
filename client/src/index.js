@@ -20,11 +20,11 @@ import config from "./auth_config.json";
 //   };
 
 ReactDOM.render(
-    <Auth0Provider
-    domain={config.domain}
-    client_id={config.clientId}
-    redirect_uri={window.location.origin}
-    >
+  <Auth0Provider
+      domain={config.domain}
+      clientId= {config.clientId}
+      redirectUri={window.location.origin}
+  >
       <BrowserRouter>
           <App />
       </BrowserRouter>

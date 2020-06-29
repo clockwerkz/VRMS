@@ -2,7 +2,7 @@ import React from "react";
 import { AuthProvider } from "./context/authContext";
 import { Route } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
-
+import { Auth0Provider } from '@auth0/auth0-react';
 import Firebase from "./firebase";
 
 import Home from "./pages/Home";
@@ -58,22 +58,22 @@ const routes = [
 const App = () => {
     return (
         <AuthProvider>
-            <div className="app">
-                <div className="app-container">
-                    <Navbar />
-                    <main role="main" className="main">
-                        {routes.map(({ path, Component }) => (
-                            <Route
-                                key={path}
-                                exact
-                                path={path}
-                                component={Component}
-                            />
-                        ))}
-                    </main>
-                    <Footer />
+                <div className="app">
+                    <div className="app-container">
+                        <Navbar />
+                        <main role="main" className="main">
+                            {routes.map(({ path, Component }) => (
+                                <Route
+                                    key={path}
+                                    exact
+                                    path={path}
+                                    component={Component}
+                                />
+                            ))}
+                        </main>
+                        <Footer />
+                    </div>
                 </div>
-            </div>
         </AuthProvider>
     );
 };
